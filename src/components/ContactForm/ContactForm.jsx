@@ -1,7 +1,7 @@
 import React from 'react';
 import css from './ContactForm.module.css';
 import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
 import { useSelector } from 'react-redux';
 import { getContacts } from 'redux/selectors';
 
@@ -17,8 +17,10 @@ const ContactForm = () => {
     const isInBase = contacts.some(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
+    const newContact = { name: name, number: number };
+
     if (!isInBase) {
-      dispatch(addContact(name, number));
+      dispatch(addContact(newContact));
       form.reset();
     } else {
       alert(`${name} is in use. Try another name.`);
