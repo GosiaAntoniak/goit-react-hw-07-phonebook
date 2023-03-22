@@ -11,8 +11,8 @@ const ContactList = () => {
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
 
-  const handleDelete = e => {
-    dispatch(deleteContact(e.target.id));
+  const handleDelete = contactId => {
+    dispatch(deleteContact({ contactId }));
   };
 
   return (
@@ -25,7 +25,7 @@ const ContactList = () => {
           return (
             <Contact key={contact.id}>
               {contact.name} : {contact.number}{' '}
-              <button id={contact.id} onClick={handleDelete}>
+              <button id={contact.id} onClick={() => handleDelete(contact.id)}>
                 Delete
               </button>
             </Contact>

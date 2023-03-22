@@ -14,33 +14,32 @@ export const fetchContacts = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const addContact = createAsyncThunk(
   'contacts/addContact',
-  async (newContact, thunkAPI) => {
+  async ({ name, number }, thunkAPI) => {
     try {
-      const { name, number } = newContact;
       const response = await client.post('/contacts', {
-        name: name,
-        number: number,
+        name,
+        number,
       });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const deleteContact = createAsyncThunk(
   'contacts/deleteTask',
-  async (contactId, thunkAPI) => {
+  async ({ contactId }, thunkAPI) => {
     try {
       const response = await client.delete(`/contacts/${contactId}`);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
-  }
+  },
 );
